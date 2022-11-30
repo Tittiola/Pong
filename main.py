@@ -6,39 +6,42 @@ pg.init()
 pantalla_principal = pg.display.set_mode((800,600))
 pg.display.set_caption("Pong")
 
+
+
+
+cronometro = pg.time.Clock()
+
 pelota = Pelota(400,300)
-raqueta1 = Raqueta(15,300)
-raqueta2 = Raqueta(782,300)
+raqueta1 = Raqueta(10,300)
+raqueta2 = Raqueta(790,300)
+
+raqueta1.vy = 5
+pelota.vx = 4
+
+
+
 game_over = False
 
 while not game_over:
+    
+    vt = cronometro.tick(60)#variable para controlar la velocidad entre fotogramas
+    #print(vt)
+
     for evento in pg.event.get():
         if evento.type == pg.QUIT:
             game_over = True
-            
-        """
 
-        #mover raqueta
-        if evento.type == pg.KEYDOWN:
-            if evento.key == pg.K_UP:
-                print("ARRIBA")
-                raqueta1.pos_y -= 3
+    raqueta1.mover(pg.K_w,pg.K_s)#mover raqueta1 izquierda
+    raqueta2.mover(pg.K_UP,pg.K_DOWN)#mover raqueta2 derecha
+    pelota.mover()#mover pelota
 
-            elif evento.key == pg.K_DOWN:
-                print("ABAJO")
-                raqueta1.pos_y += 3
-        """
-    estado_teclas = pg.key.get_pressed()
-
-    if estado_teclas[pg.K_UP] == True:
-        raqueta1.pos_y -= 1
-    elif estado_teclas[pg.K_DOWN] == True:
-        raqueta1.pos_y += 1
-
-    pantalla_principal.fill((0,128,94))
-    pg.draw.line(pantalla_principal, (255,255,255),(400,0), (400,600), width=2)
-    pelota.dibujar(pantalla_principal)
-    raqueta1.dibujar(pantalla_principal)
-    raqueta2.dibujar(pantalla_principal)
+    pantalla_principal.fill((0,128,94))#pintado de pantalla
+ 
+    pelota.marcador(pantalla_principal)#pintado de marcador
+    pg.draw.line(pantalla_principal, (255,255,255), (400,0), (400,600), width=2)#pintando linea blanca
+    pelota.dibujar(pantalla_principal)#pintado de pelota
+    raqueta1.dibujar(pantalla_principal)#pintado de raqueta1
+    raqueta2.dibujar(pantalla_principal)#pintado de raqueta2
     
+
     pg.display.flip()
