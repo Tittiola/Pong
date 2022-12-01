@@ -15,6 +15,8 @@ class Pelota:
 
 
 
+
+
     def dibujar(self,pantalla):
         pg.draw.circle(pantalla,self.color,(self.pos_x,self.pos_y),self.radio)
 
@@ -41,6 +43,10 @@ class Pelota:
             self.vx *= -1
             self.vy *= -1
 
+       
+        
+
+
 
 
     def marcador(self,pantalla_principal):
@@ -50,15 +56,15 @@ class Pelota:
         pantalla_principal.blit(marcadorIzquierda, (600, 50 ))
 
     def posicionX(self):
-        return self.pos_x+self.radio
+        return int(self.pos_x+self.radio)
 
     def posicionY(self):
-        return self.pos_y+self.radio 
+        return int(self.pos_y+self.radio) 
 
     def izquierda(self):
         if self.pos_x < 400:
             return True
-        return False
+        return False1
 
     def derecha(self):
         if self.pos_x > 400:
@@ -97,3 +103,9 @@ class Raqueta():
             self.pos_y -= 1
         if estado_teclas[tecla_abajo] == True and self.pos_y < (y_max-self.h//2) :
             self.pos_y += 1     
+
+    def posicionX(self):
+        return self.pos_x+20
+
+    def posicionY(self):
+        return self.pos_y+100

@@ -43,5 +43,9 @@ while not game_over:
     raqueta1.dibujar(pantalla_principal)#pintado de raqueta1
     raqueta2.dibujar(pantalla_principal)#pintado de raqueta2
     
+    if pelota.posicionX() > 0 and pelota.posicionX() < 20 and pelota.posicionY() < raqueta1.posicionY() and pelota.posicionY() > raqueta1.posicionY()-100:
+        pelota.posicionX *= -1
+        pelota.posicionY *= -1
+
 
     pg.display.flip()
